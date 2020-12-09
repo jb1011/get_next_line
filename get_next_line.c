@@ -19,8 +19,8 @@ char				*ft_read_and_join(char *str, int fd, int *ret)
 
 	while ((*ret = read(fd, &buff, BUFFER_SIZE)) > 0)
 	{
-		// if (*ret == -1)
-		// 	return (str);
+		if (*ret == -1)
+			return (str);
 		buff[*ret] = 0;
 		if (str)
 		{
@@ -31,6 +31,8 @@ char				*ft_read_and_join(char *str, int fd, int *ret)
 		}
 		else
 			str = ft_strdup(buff);
+		if (ft_strchr(buff, '\n'))
+			return (str);
 	}
 	return (str);
 }
